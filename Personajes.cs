@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 namespace Personajes {
 
     public class Personaje {
@@ -34,6 +36,22 @@ namespace Personajes {
         public int Nivel { get => nivel; set => nivel = value; }
         public int Armadura { get => armadura; set => armadura = value; }
         public int Salud { get => salud; set => salud = value; }
+
+        public void mostrarPersonaje(){
+
+            Console.Write($"\n - Tipo: {tipo}");
+            Console.Write($"\n - Nombre: {nombre}");
+            Console.Write($"\n - Apodo: {apodo}");
+            Console.Write($"\n - Fecha de nacimiento: {fechaNacimiento.Day}/{fechaNacimiento.Month}/{fechaNacimiento.Year}");
+            Console.Write($"\n - Edad: {edad} años");
+            Console.Write($"\n - Velocidad: {velocidad}");
+            Console.Write($"\n - Destreza: {destreza}");
+            Console.Write($"\n - Fuerza: {fuerza}");
+            Console.Write($"\n - Nivel: {nivel}");
+            Console.Write($"\n - Armadura: {armadura}");
+            Console.Write($"\n - Salud: {salud}");
+
+        }
         
     }
 
@@ -104,6 +122,45 @@ namespace Personajes {
             character.Salud = 100;
 
             return character;
+
+        }
+
+    }
+
+    public class PersonajesJson {
+
+        public void GuardarPersonajes(List<Personaje> listaPersonajes, string filename) {
+
+            string json = JsonSerializer.Serialize(listaPersonajes);
+
+            File.WriteAllText(filename, json);
+
+        }
+
+        public List<Personaje> LeerPersonajes(string filename) {
+
+            string json = File.ReadAllText(filename);
+
+            List<Personaje>? listaPersonajes = new List<Personaje>();
+
+            listaPersonajes = JsonSerializer.Deserialize<List<Personaje>>(json);
+
+            return listaPersonajes;
+
+        }
+
+        public bool Existe(string filename) {
+
+            if(File.Exists(filename)) {
+                
+                string datos = File.ReadAllText(filename);
+
+                return !String.IsNullOrEmpty(datos);
+
+            }
+            else {
+                return false;
+            }
 
         }
 
