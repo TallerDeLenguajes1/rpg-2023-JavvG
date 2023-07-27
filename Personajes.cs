@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace Personajes {
+namespace EspacioPersonajes {
 
     public class Personaje {
 
@@ -11,6 +11,7 @@ namespace Personajes {
         private string? tipo;
         private string? nombre;
         private string? apodo;
+        private string? modoAlterno;
         private DateTime fechaNacimiento;
         private int edad;   // 0 - 300
 
@@ -23,12 +24,16 @@ namespace Personajes {
         private int armadura;   // 1 - 10
         private int salud;  // 100
 
-        // Encapsulamiento - propiedades
+        // Propiedades de datos
 
         public string? Tipo { get => tipo; set => tipo = value; }
         public string? Nombre { get => nombre; set => nombre = value; }
         public string? Apodo { get => apodo; set => apodo = value; }
         public DateTime FechaNacimiento { get => fechaNacimiento; set => fechaNacimiento = value; }
+        public string? ModoAlterno { get => modoAlterno; set => modoAlterno = value; }
+
+        // Propiedades de características
+
         public int Edad { get => edad; set => edad = value; }
         public int Velocidad { get => velocidad; set => velocidad = value; }
         public int Destreza { get => destreza; set => destreza = value; }
@@ -36,20 +41,31 @@ namespace Personajes {
         public int Nivel { get => nivel; set => nivel = value; }
         public int Armadura { get => armadura; set => armadura = value; }
         public int Salud { get => salud; set => salud = value; }
-
+        
         public void mostrarPersonaje(){
 
-            Console.Write($"\n - Tipo: {tipo}");
-            Console.Write($"\n - Nombre: {nombre}");
-            Console.Write($"\n - Apodo: {apodo}");
-            Console.Write($"\n - Fecha de nacimiento: {fechaNacimiento.Day}/{fechaNacimiento.Month}/{fechaNacimiento.Year}");
-            Console.Write($"\n - Edad: {edad} años");
-            Console.Write($"\n - Velocidad: {velocidad}");
-            Console.Write($"\n - Destreza: {destreza}");
-            Console.Write($"\n - Fuerza: {fuerza}");
-            Console.Write($"\n - Nivel: {nivel}");
-            Console.Write($"\n - Armadura: {armadura}");
-            Console.Write($"\n - Salud: {salud}");
+            Console.WriteLine($"\n » DATOS");
+            Console.WriteLine($"   ⁕ Tipo: {tipo}");
+            Console.WriteLine($"   ⁕ Nombre: {nombre}");
+            Console.WriteLine($"   ⁕ Apodo: {apodo}");
+            Console.WriteLine($"   ⁕ Modo alterno: {modoAlterno}");
+            Console.WriteLine($"   ⁕ Fecha de llegada a la Tierra: {fechaNacimiento.Day}/{fechaNacimiento.Month}/{fechaNacimiento.Year}");
+            Console.WriteLine($"   ⁕ Tiempo en la tierra: {edad} años");
+
+            Console.WriteLine($"\n » CARATERÍSTICAS");
+            Console.WriteLine($"   ⁕ Velocidad: {velocidad}");       // La velocidad no debe modificarse, se considera constante en el personaje
+            Console.WriteLine($"   ⁕ Destreza: {destreza}");         // La destreza no debe modificarse, se considera constante en el personaje
+            Console.WriteLine($"   ⁕ Fuerza: {fuerza}");        // La fuerza no debe modificarse, se considera constante en el personaje
+            Console.WriteLine($"   ⁕ Nivel: {nivel}");
+            Console.WriteLine($"   ⁕ Armadura: {armadura}");         // La armadura no debe modificarse, se considera constante en el personaje
+            Console.WriteLine($"   ⁕ Salud: {salud}");
+
+        }
+
+        public void MejorarCaracteristicas() {        // Beneficia al competidor ganador del turno con una modificación en sus características
+
+            salud += 10;
+            nivel += 1;
 
         }
         
@@ -57,7 +73,7 @@ namespace Personajes {
 
     public class FabricaDePersonajes {
 
-        Random random = new Random();
+        Random random = new Random();       // Se crea la instancia para poder generar valores enteros aleatorios
 
         private DateTime GenerarFechaAleatoria() {     // Función que genera una fecha aleatoria
 
@@ -72,43 +88,141 @@ namespace Personajes {
         }
 
         private string[] tipos = {"Autobot", "Decepticon"};
-        private string[] nombresAutobots = {"Optimus Prime", "Bumblebee", "Arcee", "Ratchet", "Jazz", "Ironhide", "Wheeljack", "Prowl", "Hound", "Blaster", "Cliffjumper", "Hot Rod", "Mirage", "Stratosphere", "Jetfire"};
-        private string[] nombresDecepticons = {"Megatron", "Starscream", "Barricade", "Shockwave","Devastator", "Soundwave", "Blackout", "Bonecrusher", "Scorponok", "Ravage", "Galvatron", "Scourge", "Onslaught", "Blitzwing", "Thundercracker"};
 
-        private string ElegirNombreNoUsado(string[] listadoNombres, List<string> nombresUsados) {
+        private string[] nombresAutobots = {
+            "Optimus Prime", 
+            "Bumblebee", 
+            "Arcee", 
+            "Ratchet", 
+            "Jazz", 
+            "Ironhide", 
+            "Wheeljack", 
+            "Crosshairs", 
+            "Hound", 
+            "Blaster", 
+            "Cliffjumper", 
+            "Hot Rod", 
+            "Mirage",
+            "Stratosphere", 
+            "Jetfire"
+        };
 
-            string nombreElegido = listadoNombres[random.Next(0, listadoNombres.Length)];
+        private string[] modosAlternosAutobots = {
+            "Western Star 4900 Custom",
+            "Chevrolet Camaro SS",
+            "Harley-Davidson XR1200",
+            "GMC Topkick C4500",
+            "GMC Topkick",
+            "Hummer H2",
+            "Pontiac Solstice GXP",
+            "Chevrolet Corvette C7 Stingray",
+            "Oshkosh Medium Tactical Vehicle (MTTV) 8x8",
+            "Bugatti Veyron Grand Sport Vitesse",
+            "Lamborghini Centenario LP770-4",
+            "Bugatti Veyron Grand Sport Vitesse",
+            "Subaru Impreza WRX STi",
+            "Lockheed Martin F-35 Lightning II",
+            "Lockheed Martin F-22 Raptor"
+        };
 
-            while(nombresUsados.Contains(nombreElegido)) {
-                nombreElegido = listadoNombres[random.Next(0, listadoNombres.Length)];
-            }
+        private string[] nombresDecepticons = {
+            "Megatron", 
+            "Starscream", 
+            "Barricade", 
+            "Shockwave",
+            "Devastator", 
+            "Soundwave", 
+            "Blackout", 
+            "Bonecrusher", 
+            "Scorponok", 
+            "Ravage", 
+            "Galvatron", 
+            "Scourge", 
+            "Onslaught", 
+            "Blitzwing", 
+            "Thundercracker"
+        };
 
-            nombresUsados.Add(nombreElegido);
+        private string[] modosAlternosDecepticons = {
+            "Mack Titan ",
+            "Lockheed Martin F-22 Raptor",
+            "Saleen S281 E Police Car",
+            "Sikorsky MH-53 Pave Low",
+            "Caterpillar 992G Front-end Loader",
+            "Mercedes-Benz SLS AMG Satellite",
+            "Sikorsky MH-53 Pave Low",
+            "Buffalo Mine Protected Clearance Vehicle",
+            "Sikorsky UH-60 Black Hawk",
+            "Condor II UAV",
+            "Freightliner Century Class Truck",
+            "Junkion Motorcycle",
+            "AK-47 Assault Rifle (Hightower)",
+            "McDonnell Douglas F/A-18 Hornet",
+            "Lockheed Martin F-22 Raptor"
+        };
 
-            return nombreElegido;
 
-        }
 
-        public Personaje CrearPersonaje() {     // Método que retorna un personaje con sus datos y características
+        private string[] apodosAutobots = {
+            "\"El líder de los Autobots\"",
+            "\"El soldado más valiente\"",
+            "\"La valiente guerrera\"",
+            "\"El médico experto\"",
+            "\"El alma musical\"",
+            "\"El protector veterano\"",
+            "\"El genio inventor\"",
+            "\"El francotirador\"",
+            "\"El rastreador experto\"",
+            "\"El amante de la música\"",
+            "\"El pequeño valiente\"",
+            "\"El corredor ardiente\"",
+            "\"El ilusionista\"",
+            "\"El gigante del cielo\"",
+            "\"El defensor del cielo\""
+        };
+
+        private string[] apodosDecepticons = {
+            "\"El líder de los Decepticons\"",
+            "\"El traidor ambicioso\"",
+            "\"El despiadado\"",
+            "\"El científico malévolo\"",
+            "\"El destructor masivo\"",
+            "\"El maestro de la comunicación\"",
+            "\"La sombra silenciosa\"",
+            "\"El triturador de huesos\"",
+            "\"El escorpión mortal\"",
+            "\"El depredador sigiloso\"",
+            "\"La reencarnación oscura\"",
+            "\"El guerrero implacable\"",
+            "\"El estratega poderoso\"",
+            "\"El trueno temible\""
+        };
+
+        public Personaje CrearPersonaje(int tipoPersonaje) {     // Método que retorna un personaje con sus datos y características
 
             Personaje character = new Personaje();
 
-            List<string> listaNombresUsados = new List<string>();
+            // Selección del nombre del personaje (no repetidos)
+
+            List<int> indicesUsados = new List<int>();
+
+            int indice = random.Next(0, nombresAutobots.Length);
+
+            if(indicesUsados != null) {
+                    
+                while(indicesUsados.Contains(indice)) {
+                    indicesUsados.Add(indice);
+                    indice = random.Next(0, nombresAutobots.Length);
+                }
+
+            }
 
             // Carga de datos
 
-            character.Tipo = tipos[random.Next(0,2)];
-
-            character.Nombre = character.Tipo == "Autobot" ? ElegirNombreNoUsado(nombresAutobots, listaNombresUsados) : ElegirNombreNoUsado(nombresDecepticons, listaNombresUsados);
-
-            Console.Write(" Ingresá el apodo de tu personaje: ");
-            character.Apodo = Console.ReadLine();
-
-            while(String.IsNullOrEmpty(character.Apodo)) {
-                Console.Write(" (!) No ingresaste el apodo: ");
-                character.Apodo = Console.ReadLine();
-            }
-
+            character.Tipo = tipos[tipoPersonaje];
+            character.Nombre = character.Tipo == "Autobot" ? nombresAutobots[indice] : nombresDecepticons[indice];
+            character.Apodo = character.Tipo == "Autobot" ? apodosAutobots[indice] : apodosDecepticons[indice];
+            character.ModoAlterno = character.Tipo == "Autobot" ? modosAlternosAutobots[indice] : modosAlternosDecepticons[indice];
             character.FechaNacimiento = GenerarFechaAleatoria();
             character.Edad = DateTime.Now.Year - character.FechaNacimiento.Year;
 
@@ -129,6 +243,8 @@ namespace Personajes {
 
     public class PersonajesJson {
 
+        // Guarda una lista de personajes en un archivo de extensión JSON
+
         public void GuardarPersonajes(List<Personaje> listaPersonajes, string filename) {
 
             string json = JsonSerializer.Serialize(listaPersonajes);
@@ -137,17 +253,24 @@ namespace Personajes {
 
         }
 
+        // Lee y guarda en una lista los personajes desde un archivo de extensión JSON
+
         public List<Personaje> LeerPersonajes(string filename) {
 
             string json = File.ReadAllText(filename);
 
-            List<Personaje>? listaPersonajes = new List<Personaje>();
+            List<Personaje>? listaPersonajes = JsonSerializer.Deserialize<List<Personaje>>(json);
 
-            listaPersonajes = JsonSerializer.Deserialize<List<Personaje>>(json);
-
-            return listaPersonajes;
+            if(listaPersonajes != null) {
+                return listaPersonajes;
+            }
+            else {
+                return new List<Personaje>();
+            }
 
         }
+
+        // Verifica si existe un archivo JSON, y si éste no está vacío
 
         public bool Existe(string filename) {
 
