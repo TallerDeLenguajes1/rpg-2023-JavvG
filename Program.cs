@@ -1,4 +1,6 @@
 ﻿using EspacioPersonajes;
+using GameplaySpace;
+using InterfaceSpace;
 
 int cantidadDePersonajes = 4;       // Debe ser un número par, pues son dos bandos de personajes
 
@@ -27,23 +29,18 @@ else {
 
 }
 
-Console.Write("\n\n >> Estos son los personajes del juego: \n\n");
+InterfazDelJuego interfazGrafica = new InterfazDelJuego();
 
-int count = 1;
+Console.Write("\n\n\n");
 
-foreach(var personaje in listaPersonajes) {
+interfazGrafica.MostrarBienvenida();
 
-    Console.Write($"\n\n PERSONAJE NRO. {count}\n");
-    personaje.mostrarPersonaje();
-    Console.Write("\n");
-    count++;
+Console.Write("\n\n");
 
-}
+interfazGrafica.MenuOpciones(listaPersonajes);
 
-Console.ReadLine();
+Console.Clear();
 
-Gameplay juego = new Gameplay();    // Se inicia una nueva instancia del juego
+Thread.Sleep(3000);         // Pausa de 3 segundos
 
-juego.InicioDeJuego(listaPersonajes);
-
-Console.WriteLine(" Juego finalizado");
+interfazGrafica.MostrarMensajeJuegoTerminado();

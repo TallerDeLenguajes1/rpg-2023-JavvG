@@ -42,7 +42,7 @@ namespace EspacioPersonajes {
         public int Armadura { get => armadura; set => armadura = value; }
         public int Salud { get => salud; set => salud = value; }
         
-        public void mostrarPersonaje(){
+        public void MostrarPersonaje(){
 
             Console.WriteLine($"\n » DATOS");
             Console.WriteLine($"   ⁕ Tipo: {tipo}");
