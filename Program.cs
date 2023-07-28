@@ -35,11 +35,9 @@ Console.Write("\n\n\n");
 
 interfazGrafica.MostrarBienvenida();
 
-Console.Write("\n\n");
-
 interfazGrafica.MenuOpciones(listaPersonajes);
 
-Console.Clear();
+interfazGrafica.JugarDeNuevo();          // Pregunta al usuario si desea jugar de nuevo
 
 Thread.Sleep(3000);         // Pausa de 3 segundos
 

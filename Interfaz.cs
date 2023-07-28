@@ -92,7 +92,7 @@ namespace InterfaceSpace {
 
             Console.Write("\n\n\n " + welcomeMessage[random.Next(0, welcomeMessage.Length)]);
 
-            Thread.Sleep(5000);     // Pausa de 1 segundo
+            Thread.Sleep(5000);     // Pausa de 5 segundos
 
             Console.Clear();
 
@@ -225,11 +225,12 @@ namespace InterfaceSpace {
 
         public void MostrarPersonajeGanador(Personaje ganador) {
 
-            Console.WriteLine("╔══════════════════════════════════════════╗");
-            Console.WriteLine("║             ╔═════════════╗              ║");
-            Console.WriteLine("║             ║   GANADOR   ║              ║");
-            Console.WriteLine("║             ╚═════════════╝              ║");
-            Console.WriteLine("╚══════════════════════════════════════════╝");
+            Console.WriteLine("\n\n");
+            Console.WriteLine("                     ╔══════════════════════════════════════════╗");
+            Console.WriteLine("                     ║             ╔═════════════╗              ║");
+            Console.WriteLine("                     ║             ║   GANADOR   ║              ║");
+            Console.WriteLine("                     ║             ╚═════════════╝              ║");
+            Console.WriteLine("                     ╚══════════════════════════════════════════╝");
             Console.WriteLine("\n");
             ganador.MostrarPersonaje();
 
@@ -239,23 +240,22 @@ namespace InterfaceSpace {
 
         public void MostrarListaDePersonajes(List<Personaje> listaDePersonajes) {
             
-            Console.WriteLine("╔═════════════════════════════════════════════╗");
-            Console.WriteLine("║             ╔════════════════╗              ║");
-            Console.WriteLine("║             ║   PERSONAJES   ║              ║");
-            Console.WriteLine("║             ╚════════════════╝              ║");
-            Console.WriteLine("╚═════════════════════════════════════════════╝");
+            Console.WriteLine("\n\n");
+            Console.WriteLine("                     ╔═════════════════════════════════════════════╗");
+            Console.WriteLine("                     ║             ╔════════════════╗              ║");
+            Console.WriteLine("                     ║             ║   PERSONAJES   ║              ║");
+            Console.WriteLine("                     ║             ╚════════════════╝              ║");
+            Console.WriteLine("                     ╚═════════════════════════════════════════════╝");
 
             int count = 1;
 
             foreach (var personaje in listaDePersonajes) {
 
-                Console.Write($"\n\n PERSONAJE NRO. {count}\n");
+                Console.Write($"\n\n                      - PERSONAJE NRO. {count} -\n\n");
                 personaje.MostrarPersonaje();
                 Console.Write("\n");
                 count++;
                 Console.ReadLine();         // Agrega una pausa para que el usuario pueda ver cada personaje antes de continuar
-
-                Console.WriteLine("═══════════════════════════════════════════════");
 
             }
 
@@ -267,6 +267,113 @@ namespace InterfaceSpace {
             Gameplay juego = new Gameplay();    // Se inicia una nueva instancia del juego
 
             juego.InicioDeJuego(listaDePersonajes);
+
+        }
+
+        public void JugarDeNuevo() {
+
+            // Diseño de un menú de opciones
+            
+            ConsoleKeyInfo tecla = new ConsoleKeyInfo('A', ConsoleKey.A, false, false, false);        // Describe la tecla de la consola que fue presionada, incluyendo el carácter representado por la tecla de la consola (los tres parámetros booleanos corresponden a los estados de las teclas modificadoras SHIFT, ALT y CTRL)
+            
+            int option = 1, output = 0;
+            
+            while(output != 2) {
+
+                Console.WriteLine("\n\n\n\n\n\n");
+                Console.WriteLine("                                              ╔═════════════════════════════════════════════╗");
+                Console.WriteLine("                                              ║                                             ║");
+                Console.WriteLine("                                              ║         ╔════════════════════════╗          ║");
+                Console.WriteLine("                                              ║         ║    ¿JUGAR DE NUEVO?    ║          ║");
+                Console.WriteLine("                                              ║         ╚════════════════════════╝          ║");
+                Console.WriteLine("                                              ║           ┌─────────────────────┐           ║");
+
+                if (option == 1) {
+                    Console.WriteLine("                                              ║           ►         SI          ◄           ║");
+                }
+                else {
+                    Console.WriteLine("                                              ║           |         Si          |           ║");
+                }
+                Console.WriteLine("                                              ║           ├─────────────────────┤           ║");
+
+                if (option == 2) {
+                    Console.WriteLine("                                              ║           ►         NO          ◄           ║");
+                }
+                else {
+                    Console.WriteLine("                                              ║           |          No         |           ║");
+                }
+
+                Console.WriteLine("                                              ║           ├─────────────────────┤           ║");
+                Console.WriteLine("                                              ║                                             ║");
+                Console.WriteLine("                                              ╚═════════════════════════════════════════════╝");
+
+
+                tecla = Console.ReadKey();      // Se lee una tecla
+
+                Console.Clear();
+
+                if(tecla.Key == ConsoleKey.Enter) {     // Si se presionó "ENTER"
+
+                    switch (option) {
+
+                        case 1:
+
+                            Console.Clear();
+
+                            // Creación de una nueva lista de personajes y nueva serialización a JSON
+
+                            PersonajesJson characterJson = new PersonajesJson();
+
+                            List<Personaje> listaPersonajes = new List<Personaje>();
+
+                            FabricaDePersonajes characters = new FabricaDePersonajes();
+
+                            for(int i=0; i<cantidadDePersonajes/2; i++) {
+                                listaPersonajes.Add(characters.CrearPersonaje(0));
+                            }
+
+                            for(int i=0; i<cantidadDePersonajes/2; i++) {
+                                listaPersonajes.Add(characters.CrearPersonaje(1));
+                            }
+
+                            characterJson.GuardarPersonajes(listaPersonajes, "Personajes.json");
+
+                            MenuOpciones(listaPersonajes);
+                           
+                        break;
+
+                        case 2:
+                            Console.Clear();
+                            output = 2;
+                        break;
+
+                    }
+
+                    Console.Clear();
+                    
+                } else if(tecla.Key == ConsoleKey.DownArrow) {      //Si se presionó la tecla de dirección hacia abajo
+
+                    option++;
+
+                } else if(tecla.Key == ConsoleKey.UpArrow) {        //Si se presionó la tecla de dirección hacia arriba
+
+                    option--;
+
+                }
+
+                if(option<1) {      //Controla la repetición de la pulsación de tecla de dirección hacia arriba
+
+                    option = 1;
+
+                } else if(option>2) {       //Controla la repetición de la pulsación de tecla de dirección hacia abajo
+
+                    option = 2;
+
+                }
+
+                Console.Clear();
+
+            };
 
         }
 

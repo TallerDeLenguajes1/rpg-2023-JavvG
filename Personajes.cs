@@ -44,22 +44,24 @@ namespace EspacioPersonajes {
         
         public void MostrarPersonaje(){
 
-            Console.WriteLine($"\n » DATOS");
-            Console.WriteLine($"   ⁕ Tipo: {tipo}");
-            Console.WriteLine($"   ⁕ Nombre: {nombre}");
-            Console.WriteLine($"   ⁕ Apodo: {apodo}");
-            Console.WriteLine($"   ⁕ Modo alterno: {modoAlterno}");
-            Console.WriteLine($"   ⁕ Fecha de llegada a la Tierra: {fechaNacimiento.Day}/{fechaNacimiento.Month}/{fechaNacimiento.Year}");
-            Console.WriteLine($"   ⁕ Tiempo en la tierra: {edad} años");
+            Console.WriteLine("                     ╔══ DATOS ═════════════════════════════════╗\n");
+            Console.WriteLine($"                     ║   ⁕ Tipo: {tipo}");
+            Console.WriteLine($"                     ║   ⁕ Nombre: {nombre}");
+            Console.WriteLine($"                     ║   ⁕ Apodo: {apodo}");
+            Console.WriteLine($"                     ║   ⁕ Modo alterno: {modoAlterno}");
+            Console.WriteLine($"                     ║   ⁕ Fecha de llegada a la Tierra: {fechaNacimiento.Day}/{fechaNacimiento.Month}/{fechaNacimiento.Year}");
+            Console.WriteLine($"                     ║   ⁕ Tiempo en la tierra: {edad} años \n");
+            Console.WriteLine("                     ╚══════════════════════════════════════════╝");
 
-            Console.WriteLine($"\n » CARATERÍSTICAS");
-            Console.WriteLine($"   ⁕ Velocidad: {velocidad}");       // La velocidad no debe modificarse, se considera constante en el personaje
-            Console.WriteLine($"   ⁕ Destreza: {destreza}");         // La destreza no debe modificarse, se considera constante en el personaje
-            Console.WriteLine($"   ⁕ Fuerza: {fuerza}");        // La fuerza no debe modificarse, se considera constante en el personaje
-            Console.WriteLine($"   ⁕ Nivel: {nivel}");
-            Console.WriteLine($"   ⁕ Armadura: {armadura}");         // La armadura no debe modificarse, se considera constante en el personaje
-            Console.WriteLine($"   ⁕ Salud: {salud}");
-
+            Console.WriteLine("                     ╔══ CARACTERÍSTICAS ═══════════════════════╗\n");
+            Console.WriteLine($"                     ║   ⁕ Velocidad: {velocidad}");       // La velocidad no debe modificarse, se considera constante en el personaje
+            Console.WriteLine($"                     ║   ⁕ Destreza: {destreza}");         // La destreza no debe modificarse, se considera constante en el personaje
+            Console.WriteLine($"                     ║   ⁕ Fuerza: {fuerza}");        // La fuerza no debe modificarse, se considera constante en el personaje
+            Console.WriteLine($"                     ║   ⁕ Nivel: {nivel}");
+            Console.WriteLine($"                     ║   ⁕ Armadura: {armadura}");         // La armadura no debe modificarse, se considera constante en el personaje
+            Console.WriteLine($"                     ║   ⁕ Salud: {salud}\n");
+            Console.WriteLine("                     ╚══════════════════════════════════════════╝");
+           
         }
 
         public void MejorarCaracteristicas() {        // Beneficia al competidor ganador del turno con una modificación en sus características

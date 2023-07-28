@@ -2,6 +2,7 @@ using EspacioPersonajes;
 using InterfaceSpace;
 
 namespace GameplaySpace {
+    
     // En este archivo se establecen las directivas del juego, el modo de selección de los jugadores y el combate
 
     public class Gameplay {
@@ -153,22 +154,24 @@ namespace GameplaySpace {
             
             Random random = new Random();
 
-            Console.WriteLine("╔════════════════════════════════════════════════════════════════════════════════╗");
-            Console.WriteLine("║             ╔═══════════════════════════════════════════════════╗              ║");
-            Console.WriteLine("║             ║   ¡LOS DOS BANDOS ESTÁN LISTOS PARA EL COMBATE!   ║              ║");
-            Console.WriteLine("║             ╚═══════════════════════════════════════════════════╝              ║");
-            Console.WriteLine("╚════════════════════════════════════════════════════════════════════════════════╝");
+            Console.WriteLine("\n\n");
+            Console.WriteLine("                     ╔════════════════════════════════════════════════════════════════════════════════╗");
+            Console.WriteLine("                     ║             ╔═══════════════════════════════════════════════════╗              ║");
+            Console.WriteLine("                     ║             ║   ¡LOS DOS BANDOS ESTÁN LISTOS PARA EL COMBATE!   ║              ║");
+            Console.WriteLine("                     ║             ╚═══════════════════════════════════════════════════╝              ║");
+            Console.WriteLine("                     ╚════════════════════════════════════════════════════════════════════════════════╝");
             Console.WriteLine("\n\n");
 
             string mensaje1, mensaje2;
 
             // La presentación consiste en un mensaje nombrando al competidor (mensaje1), y un diálogo del personaje (mensaje2)
 
-            Console.WriteLine("╔════════════════════════════════════════════════╗");
-            Console.WriteLine("║             ╔═══════════════════╗              ║");
-            Console.WriteLine("║             ║   BANDO AUTOBOT   ║              ║");
-            Console.WriteLine("║             ╚═══════════════════╝              ║");
-            Console.WriteLine("╚════════════════════════════════════════════════╝");
+            Console.WriteLine("\n\n");
+            Console.WriteLine("                     ╔════════════════════════════════════════════════╗");
+            Console.WriteLine("                     ║             ╔═══════════════════╗              ║");
+            Console.WriteLine("                     ║             ║   BANDO AUTOBOT   ║              ║");
+            Console.WriteLine("                     ║             ╚═══════════════════╝              ║");
+            Console.WriteLine("                     ╚════════════════════════════════════════════════╝");
             Console.WriteLine("\n\n");
 
 
@@ -184,11 +187,12 @@ namespace GameplaySpace {
                 Console.WriteLine($"\n\"{mensaje2}\"");
             }
 
-            Console.WriteLine("╔═══════════════════════════════════════════════════╗");
-            Console.WriteLine("║             ╔══════════════════════╗              ║");
-            Console.WriteLine("║             ║   BANDO DECEPTICON   ║              ║");
-            Console.WriteLine("║             ╚══════════════════════╝              ║");
-            Console.WriteLine("╚═══════════════════════════════════════════════════╝");
+            Console.WriteLine("\n\n");
+            Console.WriteLine("                     ╔═══════════════════════════════════════════════════╗");
+            Console.WriteLine("                     ║             ╔══════════════════════╗              ║");
+            Console.WriteLine("                     ║             ║   BANDO DECEPTICON   ║              ║");
+            Console.WriteLine("                     ║             ╚══════════════════════╝              ║");
+            Console.WriteLine("                     ╚═══════════════════════════════════════════════════╝");
             Console.WriteLine("\n\n");
 
             mensaje1 = mensajesPresentacionDecepticon[random.Next(0, mensajesPresentacionDecepticon.Length)];
@@ -214,12 +218,12 @@ namespace GameplaySpace {
         public void Combate(Personaje autobot, Personaje decepticon, List<Personaje> autobots, List<Personaje> decepticons) {
 
             Console.Clear();
-
-            Console.WriteLine("╔═════════════════════════════════════════════════════════╗");
-            Console.WriteLine("║             ╔════════════════════════════╗              ║");
-            Console.WriteLine("║             ║     ¡INICIÓ EL COMBATE!    ║              ║");
-            Console.WriteLine("║             ╚════════════════════════════╝              ║");
-            Console.WriteLine("╚═════════════════════════════════════════════════════════╝");
+            Console.WriteLine("\n\n");
+            Console.WriteLine("                     ╔═════════════════════════════════════════════════════════╗");
+            Console.WriteLine("                     ║             ╔════════════════════════════╗              ║");
+            Console.WriteLine("                     ║             ║     ¡INICIÓ EL COMBATE!    ║              ║");
+            Console.WriteLine("                     ║             ╚════════════════════════════╝              ║");
+            Console.WriteLine("                     ╚═════════════════════════════════════════════════════════╝");
             Console.WriteLine("\n\n");
 
             // Se inicia una partida de combate entre dos competidores
@@ -333,6 +337,7 @@ namespace GameplaySpace {
                 }
 
                 Console.Clear();
+                Console.WriteLine("\n\n");
 
                 interfaz.MostrarPersonajeGanador(ganadorPartidaAnterior);
 
@@ -343,12 +348,11 @@ namespace GameplaySpace {
                 // Se inicia una nueva partida de combate, hasta que alguno de los bandos quede sin cometidores
 
                 Console.WriteLine("\n\n");
-
-                Console.WriteLine("╔═══════════════════════════════════════════════════╗");
-                Console.WriteLine("║             ╔══════════════════════╗              ║");
-                Console.WriteLine("║             ║     NUEVA PARTIDA    ║              ║");
-                Console.WriteLine("║             ╚══════════════════════╝              ║");
-                Console.WriteLine("╚═══════════════════════════════════════════════════╝");
+                Console.WriteLine("                     ╔═══════════════════════════════════════════════════╗");
+                Console.WriteLine("                     ║             ╔══════════════════════╗              ║");
+                Console.WriteLine("                     ║             ║     NUEVA PARTIDA    ║              ║");
+                Console.WriteLine("                     ║             ╚══════════════════════╝              ║");
+                Console.WriteLine("                     ╚═══════════════════════════════════════════════════╝");
                 Console.WriteLine("\n\n");
 
                 PresentacionDeCompetidores(autobot, decepticon, autobots, decepticons);     // Este método también inicia el combate
@@ -364,31 +368,34 @@ namespace GameplaySpace {
 
                 if (autobot.Salud <= 0 && decepticon.Salud <= 0) {
 
-                    Console.WriteLine("╔════════════════════════════════════════════════════════════════════════════════╗");
-                    Console.WriteLine("║             ╔═══════════════════════════════════════════════════╗              ║");
-                    Console.WriteLine("║             ║           ¡LA GUERRA TERMINÓ EN EMPATE!           ║              ║");
-                    Console.WriteLine("║             ╚═══════════════════════════════════════════════════╝              ║");
-                    Console.WriteLine("╚════════════════════════════════════════════════════════════════════════════════╝");
+                    Console.WriteLine("\n\n");
+                    Console.WriteLine("                     ╔════════════════════════════════════════════════════════════════════════════════╗");
+                    Console.WriteLine("                     ║             ╔═══════════════════════════════════════════════════╗              ║");
+                    Console.WriteLine("                     ║             ║           ¡LA GUERRA TERMINÓ EN EMPATE!           ║              ║");
+                    Console.WriteLine("                     ║             ╚═══════════════════════════════════════════════════╝              ║");
+                    Console.WriteLine("                     ╚════════════════════════════════════════════════════════════════════════════════╝");
                     Console.WriteLine("\n\n");
 
                 }
                 else if (ganadorPartidaAnterior.Tipo == "Decepticon") {
 
-                    Console.WriteLine("╔════════════════════════════════════════════════════════════════════════════════╗");
-                    Console.WriteLine("║             ╔═══════════════════════════════════════════════════╗              ║");
-                    Console.WriteLine("║             ║     ¡LOS DECEPTICONS HAN GANADO LA GUERRA!        ║              ║");
-                    Console.WriteLine("║             ╚═══════════════════════════════════════════════════╝              ║");
-                    Console.WriteLine("╚════════════════════════════════════════════════════════════════════════════════╝");
+                    Console.WriteLine("\n\n");
+                    Console.WriteLine("                     ╔════════════════════════════════════════════════════════════════════════════════╗");
+                    Console.WriteLine("                     ║             ╔═══════════════════════════════════════════════════╗              ║");
+                    Console.WriteLine("                     ║             ║     ¡LOS DECEPTICONS HAN GANADO LA GUERRA!        ║              ║");
+                    Console.WriteLine("                     ║             ╚═══════════════════════════════════════════════════╝              ║");
+                    Console.WriteLine("                     ╚════════════════════════════════════════════════════════════════════════════════╝");
                     Console.WriteLine("\n\n");
 
                 }
                 else {
-
-                    Console.WriteLine("╔════════════════════════════════════════════════════════════════════════════════╗");
-                    Console.WriteLine("║             ╔═══════════════════════════════════════════════════╗              ║");
-                    Console.WriteLine("║             ║       ¡LOS AUTOBOTS HAN GANADO LA GUERRA!         ║              ║");
-                    Console.WriteLine("║             ╚═══════════════════════════════════════════════════╝              ║");
-                    Console.WriteLine("╚════════════════════════════════════════════════════════════════════════════════╝");
+                    
+                    Console.WriteLine("\n\n");
+                    Console.WriteLine("                     ╔════════════════════════════════════════════════════════════════════════════════╗");
+                    Console.WriteLine("                     ║             ╔═══════════════════════════════════════════════════╗              ║");
+                    Console.WriteLine("                     ║             ║       ¡LOS AUTOBOTS HAN GANADO LA GUERRA!         ║              ║");
+                    Console.WriteLine("                     ║             ╚═══════════════════════════════════════════════════╝              ║");
+                    Console.WriteLine("                     ╚════════════════════════════════════════════════════════════════════════════════╝");
                     Console.WriteLine("\n\n");
 
                 }
