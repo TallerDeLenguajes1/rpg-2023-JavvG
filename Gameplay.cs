@@ -1,11 +1,60 @@
 using EspacioPersonajes;
 using InterfaceSpace;
+using System.Net;
+using API;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace GameplaySpace {
-    
+
     // En este archivo se establecen las directivas del juego, el modo de selección de los jugadores y el combate
 
     public class Gameplay {
+
+        public void MostrarUbicacion() {
+
+            string apiURL = $"https://randomuser.me/api/";
+            
+            var request = (HttpWebRequest) WebRequest.Create(apiURL);
+
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+
+            try {
+
+                using (WebResponse response = request.GetResponse()) {
+
+                    using (Stream strReader = response.GetResponseStream()) {
+
+                        if (strReader == null) return;
+                        
+                        using (StreamReader objReader = new StreamReader(strReader)) {
+
+                            string responseBody = objReader.ReadToEnd();
+
+                            File.WriteAllText("Ubicaciones.json", responseBody);
+
+                            // Deserializa la respuesta JSON utilizando la clase root
+
+                            Root? datos;
+                            List<string>? locations = new List<string>();
+
+                            string json = File.ReadAllText("Ubicaciones.json");
+                            datos = JsonSerializer.Deserialize<Root>(json);
+
+                            Console.WriteLine($" > Lugar del combate: {datos.results[0].location.city}, {datos.results[0].location.state}, {datos.results[0].location.country}");
+
+                        }
+                    }
+                }
+
+            }
+            catch (WebException) {
+                Console.WriteLine("Ha ocurrido un error al intentar acceder a la API para generar ubicaciones");
+            }
+
+        }
 
         InterfazDelJuego interfaz = new InterfazDelJuego();
 
@@ -225,6 +274,8 @@ namespace GameplaySpace {
             Console.WriteLine("                     ║             ╚════════════════════════════╝              ║");
             Console.WriteLine("                     ╚═════════════════════════════════════════════════════════╝");
             Console.WriteLine("\n\n");
+
+            MostrarUbicacion();
 
             // Se inicia una partida de combate entre dos competidores
 
